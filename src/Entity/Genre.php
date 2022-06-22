@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\GenreRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GenreRepository::class)]
@@ -18,6 +20,14 @@ class Genre
 
     #[ORM\ManyToOne(targetEntity: Livre::class, inversedBy: 'genre')]
     private $livre;
+
+    #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Livre::class)]
+    private $livres;
+
+    public function __construct()
+    {
+        $this->livres = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -46,6 +56,14 @@ class Genre
         $this->livre = $livre;
 
         return $this;
+    }
+    
+    /**
+     * @return Collection<int, Livre>
+     */
+    public function getLivres(): Collection
+    {
+        return $this->livres;
     }
     public function __toString(){
         return $this->getNom();
