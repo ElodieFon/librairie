@@ -3,49 +3,31 @@
 {% block title %}Livre{% endblock %}
 
 {% block body %}
-    <h1>Livre</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ livre.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ livre.titre }}</td>
-            </tr>
-            <tr>
-                <th>Date_parution</th>
-                <td>{{ livre.dateParution ? livre.dateParution|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Resume</th>
-                <td>{{ livre.resume }}</td>
-            </tr>
-            <tr>
-                <th>Edition</th>
-                <td>{{ livre.edition }}</td>
-            </tr>
+    <h1>{{livre.titre}}</h1>
+    <div class="card" style="width: 18rem;margin:auto;">
+        <img src="{{ livre.image }}" alt="{{livre.titre}}">
+        <div class="card-body">
+          <h3 class="card-title">{{livre.titre}}</h3>
+            <h4>{{livre.auteur.prenom}} {{livre.auteur}} </h4>
+          <p class="card-text">{{livre.resume}}</p>
+          <p><small><em>{{ livre.dateParution ? livre.dateParution|date('Y-m-d') : '' }} - editeur : {{ livre.edition }}</em></small></p>
+          <p>{{ livre.isbn }}</p>
+          
+        </div>
+      </div>
+    <table class="table" style="width: 18rem;">
+        <tbody>   
             <tr>
                 <th>Prix</th>
-                <td>{{ livre.prix }}</td>
+                <td>{{ livre.prix }} euros</td>
             </tr>
             <tr>
                 <th>Langue</th>
                 <td>{{ livre.langue }}</td>
             </tr>
             <tr>
-                <th>Image</th>
-                <td>{{ livre.image }}</td>
-            </tr>
-            <tr>
-                <th>Isbn</th>
-                <td>{{ livre.isbn }}</td>
-            </tr>
-            <tr>
                 <th>Stock</th>
-                <td>{{ livre.stock }}</td>
+                <td>{{ livre.stock }} exemplaire</td>
             </tr>
         </tbody>
     </table>
